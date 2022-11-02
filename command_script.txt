@@ -1,0 +1,10 @@
+javac -classpath postgresql-42.5.0.jar Test.java
+
+POSTGRESQL IMP Commands
+-- select * from pg_catalog.pg_tables where schemaname='INFORMATION_SCHEMA' -- order by schemaname desc -- where schemaname='public';
+-- describe table public.course
+-- select * from information_schema.columns where table_name in ('course','credentials')
+-- insert into public.credentials values ('SHM','Shrutiman')
+-- select * from course where 1=2
+-- SELECT * FROM pg_settings
+
