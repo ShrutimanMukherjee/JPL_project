@@ -1,10 +1,18 @@
+Compiling .java file
 javac -classpath postgresql-42.5.0.jar Test.java
+OR
+jcmpl Test.java
 
-POSTGRESQL IMP Commands
--- select * from pg_catalog.pg_tables where schemaname='INFORMATION_SCHEMA' -- order by schemaname desc -- where schemaname='public';
--- describe table public.course
--- select * from information_schema.columns where table_name in ('course','credentials')
--- insert into public.credentials values ('SHM','Shrutiman')
--- select * from course where 1=2
--- SELECT * FROM pg_settings
+Execute .class file after compilation
+java -classpath .;postgresql-42.5.0.jar Test
+OR
+jrun Test
+
+POSTGRESQL IMP Commands for the current database hosted on elephantsql
+1. select * from pg_catalog.pg_tables where schemaname='INFORMATION_SCHEMA' -- order by schemaname desc -- where schemaname='public';
+2. describe table public.course
+3. select * from information_schema.columns where table_name in ('course','credentials')
+4. insert into public.credentials values ('SHM','Shrutiman')
+5. select * from course
+6. SELECT * FROM pg_settings
 
