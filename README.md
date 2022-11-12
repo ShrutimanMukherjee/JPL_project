@@ -18,6 +18,7 @@ Present in the quizlib package
 - ```ArrayList< ArrayList<String> > getResult()``` : returns the matrix of entire result table. The first row comprises the headers (field names)
 ### Example
 ```Java
+
 import java.util.Collection;
 import java.util.ArrayList;
 import quizlib.QuizDB;
