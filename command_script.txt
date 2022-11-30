@@ -1,3 +1,25 @@
+POSTGRESQL COMANDS FOR TESTING
+-- select * from information_schema.columns where table_schema='public' and table_name in (select tablename from pg_catalog.pg_tables where schemaname='public') order by table_name, ordinal_position
+
+-- select * from user_list
+-- delete from user_list where user_id=1
+
+-- select * from course
+
+-- select * from question
+-- delete from question where 1=1
+-- alter table question alter column q_id type int
+
+-- select * from test
+-- delete from test where test_id = 'DemoT1'
+
+
+
+
+
+
+
+
 javac -classpath postgresql-42.5.0.jar Test.java
 
 POSTGRESQL IMP Commands
