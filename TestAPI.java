@@ -6,7 +6,7 @@ public class TestAPI
 	public static void main(String args[])
 	{
 		QuizDB qobj = new QuizDB();
-		qobj.runQuery("SELECT * FROM course");
+		qobj.runQuery("SELECT * FROM course where 1=2");
 		System.out.println("Testing resultDisplay:");
 		qobj.resultDisplay();
 		
