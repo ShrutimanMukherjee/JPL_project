@@ -1,6 +1,7 @@
 import quizlib.QuizDB;
 import java.util.ArrayList;
-public class User // Also the Tester class for testing functions
+
+public class User
 {
 	private long id;
 	private String name;
@@ -41,19 +42,6 @@ public class User // Also the Tester class for testing functions
 			return true;
 		else
 			return false;
-	}
-	
-	public static void main(String args[])
-	{
-		User u = new User(0,"Shrutiman0","ShM_pwd0");
-		User u1 = new User(1,"Shrutiman","ShM_pwd");
-		
-		u.push2db();
-		u1.push2db();
-		
-		System.out.println(User.validate(1,"ShM_pwd"));
-		
-		u1.display();
 	}
 }
 
