@@ -45,5 +45,5 @@ public class TestAPI
 ```
 ![image](https://user-images.githubusercontent.com/88941689/201488526-fea844f6-f106-45f2-9e02-62791cdb6314.png)
 
-#
-command_script.txt (unnecessary) has a dump of some commands that may or may not be needed
+# command_script.txt
+command_script.txt has important PGSQL queries that will be needed from time to time
