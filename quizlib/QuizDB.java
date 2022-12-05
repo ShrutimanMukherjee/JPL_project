@@ -26,6 +26,12 @@ public class QuizDB
             System.out.println("Cannot find : "+e.getMessage());
         }
 		
+		fields = new ArrayList<String>();
+		table = new ArrayList<ArrayList<String>>();
+	}
+	
+	public void runQuery(String query)
+	{
 		try
 		{
 			db = DriverManager.getConnection(url, username, password);
@@ -34,12 +40,7 @@ public class QuizDB
 		{
 			System.out.println("SQL-Driver Exception : "+e.getMessage());
 		}
-		fields = new ArrayList<String>();
-		table = new ArrayList<ArrayList<String>>();
-	}
-	
-	public void runQuery(String query)
-	{
+		
 		try 
 		{
 			Statement st = db.createStatement();
@@ -47,6 +48,10 @@ public class QuizDB
 			
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
+			
+			fields = new ArrayList<String>();
+			table = new ArrayList<ArrayList<String>>();
+			
 			for(int field=1; field<=columns; field++)
 			{
 				fields.add(rsmd.getColumnName(field));
@@ -67,6 +72,15 @@ public class QuizDB
 		catch (java.sql.SQLException e)
 		{
 			System.out.println("SQL Exception : "+e.getMessage());
+		}
+		
+		try
+		{
+			db.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Connection closing exception : "+e.getMessage());
 		}
 	}
 	
