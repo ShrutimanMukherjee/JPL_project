@@ -7,7 +7,7 @@ public class Tester
 		t.viewMarks("JavaT2");
 	}
 }
-// Sign up - duplicate w, 1 teacher w, 1student w
+// Sign up - duplicate w, 1 teacher w, 1 student w
 /*
 for(int i=0; i<3; i++)
 	User.signup();
