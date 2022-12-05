@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public abstract class User
 {
-	private long id;
-	private String name;
-	private String pwd;
+	protected long id;
+	protected String name;
+	protected String pwd;
 	
 	public User(long id, String name, String pwd)
 	{
@@ -51,13 +51,13 @@ public abstract class User
 class Teacher extends User
 {
 	public String type;
-	private String course;
+	private String course_id;
 
-	public Teacher(long id, String name, String pwd, String course)
+	public Teacher(long id, String name, String pwd, String course_id)
 	{
 		super(id,name,pwd);
 		type = "teacher";
-		this.course = course;
+		this.course_id = course_id;
 	}
 	
 	public void push2db()
@@ -68,7 +68,7 @@ class Teacher extends User
 		if(result.size()>1)
 			System.out.println("User ID already exists");
 		else
-			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"', '"+type+"','"+course+"')");
+			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"', '"+type+"','"+course_id+"')");
 	}
 	
 	public void setTest()
@@ -129,7 +129,7 @@ class Teacher extends User
 			D = sc.nextLine();
 			System.out.print("Enter the qestion: ");
 			correct = sc.next().charAt(0);
-			Question q = new Question(qid, qstr, A, B, C, D, correct);
+			Question q = new Question(qid,id_test, qstr, A, B, C, D, correct);
 			q.push2db();
 		}
 		
@@ -190,8 +190,8 @@ class Student extends User
 			qobj.runQuery("insert into marks values(qid,this.id,0)");
 		
 		qobj.runQuery("select * from question where q_id='"+qid+"'");
-		ArrayList<ArrayList<String>> result = qobj.getResult();
-		char correct = result.get(1).get(7);
+		result = qobj.getResult();
+		char correct = result.get(1).get(7).charAt(0);
 		System.out.println("Enter your choice");
 		char chosen = sc.next().charAt(0);
 		

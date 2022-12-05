@@ -49,6 +49,7 @@ public class Exam
 	public ArrayList<Question> getQuestions()
 	{
 		ArrayList<Question> qlist = new ArrayList<Question>();
+		QuizDB qobj = new QuizDB();
 		qobj.runQuery("select * from question, test where question.test_id = '"+this.id+"'");
 		ArrayList<ArrayList<String>> result = qobj.getResult();
 		for(int i=1; i<result.size(); i++)
@@ -57,6 +58,7 @@ public class Exam
 			Question q = new Question(curr.get(0),curr.get(1),curr.get(2),curr.get(3),curr.get(4),curr.get(5),curr.get(6),curr.get(7).charAt(0));
 			qlist.add(q);
 		}
+		return qlist;
 	}
 }
 /*
