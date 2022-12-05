@@ -58,11 +58,12 @@ public class Exam
 			qlist.add(q);
 		}
 	}
-	
+}
+/*
 	public static void main(String args[]) //Testing 
 	{
 		Exam e = new Exam("DemoT1", "Demo Test", "CS001", 2022,12,1,16,0,0, 2022,12,1,17,0,0);
 		e.push2db();
 		e.display();		
 	}
-}
+*/

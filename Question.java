@@ -45,7 +45,9 @@ public class Question
 		else
 			return false;
 	}
-	
+}
+
+/*
 	public static void main(String args[]) //Test the class
 	{
 		Question q = new Question("DemoT1_1","DemoT1","Which is not a part of OOP","Encapsulation","Polymorphism","Inheritance","Recursion",'D');
@@ -54,4 +56,4 @@ public class Question
 		System.out.println(q.checkAns('A'));
 		System.out.println(q.checkAns('D'));
 	}
-}
+*/

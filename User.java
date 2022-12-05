@@ -135,6 +135,17 @@ class Teacher extends User
 		
 		e.push2db();
 	}
+	
+	public void viewMarks(String id_test)
+	{
+		QuizDB qobj = new QuizDB();
+		String query = "select m.q_id,m.stud_id,m.score,q.q_str from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"'";
+		qobj.runQuery(query);
+		qobj.resultDisplay();
+		query = "select m.stud_id,sum(m.score) as tot_score from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"'";
+		qobj.runQuery(query);
+		qobj.resultDisplay();
+	}
 }
 
 class Student extends User
@@ -157,4 +168,48 @@ class Student extends User
 		else
 			qobj.runQuery("insert into user_list(user_id,user_name,password,user_type) values("+id+", '"+name+"', '"+pwd+"', '"+type+"')");
 	}
+	
+	public void viewMarks(String id_test)
+	{
+		QuizDB qobj = new QuizDB();
+		String query = "select m.q_id,m.stud_id,m.score,q.q_str from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"' and stud_id='"+this.id+"'";
+		qobj.runQuery(query);
+		qobj.resultDisplay();
+		query = "select m.stud_id,sum(m.score) as tot_score,q.q_str from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"' and stud_id='"+this.id+"'";
+		qobj.runQuery(query);
+		qobj.resultDisplay();
+	}
+	
+	private void attemptQestion(String qid)
+	{
+		Scanner sc = new Scanner(System.in);
+		QuizDB qobj = new QuizDB();
+		qobj.runQuery("select q_id, stud_id from marks where stud_id='"+this.id+"' and q_id='"+qid+"'");
+		ArrayList<ArrayList<String>> result = qobj.getResult();
+		if(result.size()==1)
+			qobj.runQuery("insert into marks values(qid,this.id,0)");
+		
+		qobj.runQuery("select * from question where q_id='"+qid+"'");
+		ArrayList<ArrayList<String>> result = qobj.getResult();
+		char correct = result.get(1).get(7);
+		System.out.println("Enter your choice");
+		char chosen = sc.next().charAt(0);
+		
+		if(chosen==correct)
+			qobj.runQuery("update marks set score=1 where stud_id='"+this.id+"' and q_id='"+qid+"'");
+	}
 }
+
+/*
+	public void attemptTest(String id_test)
+	{
+		QuizDB qobj = new QuizDB();
+		qobj.runQuery("select q_id from question as q where q.test_id='"+id_test+"'");
+		ArrayList<ArrayList<String>> result = qobj.getResult();
+		for(int i=1; i<result.size(); i++)
+		{
+			ArrayList<String> curr = result.get(i);
+			attemptQestion(curr.get(1));
+		}
+	}
+*/
