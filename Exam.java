@@ -34,7 +34,7 @@ public class Exam
 	public void display()
 	{
 		System.out.println("------------- "+test_name+" -------------");
-		System.out.println("Corse : "+course_id);
+		System.out.println("Course : "+course_id);
 		QuizDB qobj = new QuizDB();
 		qobj.runQuery("select * from question, test where question.test_id = '"+this.id+"'");
 		ArrayList<ArrayList<String>> result = qobj.getResult();
