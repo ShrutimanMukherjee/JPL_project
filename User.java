@@ -47,11 +47,13 @@ public class User
 class Teacher extends User
 {
 	public String type;
+	private String course;
 
-	public Teacher(long id, String name, String pwd)
+	public Teacher(long id, String name, String pwd, String course)
 	{
 		super(id,name,pwd);
 		type = "teacher";
+		this.course = course;
 	}
 	
 	public void push2db()
@@ -62,7 +64,7 @@ class Teacher extends User
 		if(result.size()>1)
 			System.out.println("User ID already exists");
 		else
-			qobj.runQuery("insert into user_list(user_id,user_name,password,user_type) values("+id+", '"+name+"', '"+pwd+"', '"+type+"')");
+			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"', '"+type+"','"+course+"')");
 	}
 }
 
@@ -73,7 +75,7 @@ class Student extends User
 	public Student(long id, String name, String pwd)
 	{
 		super(id,name,pwd);
-		type = "teacher";
+		type = "student";
 	}
 
 	public void push2db()
@@ -84,6 +86,6 @@ class Student extends User
 		if(result.size()>1)
 			System.out.println("User ID already exists");
 		else
-			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"')");
+			qobj.runQuery("insert into user_list(user_id,user_name,password,user_type) values("+id+", '"+name+"', '"+pwd+"', '"+type+"')");
 	}
 }
