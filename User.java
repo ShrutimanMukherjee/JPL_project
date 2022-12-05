@@ -14,17 +14,16 @@ public class User
 		this.id = id;
 	}
 	
-	public void push2db()
+	public boolean inDB()
 	{
 		QuizDB qobj = new QuizDB();
 		qobj.runQuery("select * from user_list where user_id="+id);
 		ArrayList<ArrayList<String>> result = qobj.getResult();
 		if(result.size()>1)
-			System.out.println("User ID already exists");
-		else
-			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"')");
+			return true;
+		return false;
 	}
-	
+
 	public void display()
 	{
 		System.out.println("########### User Details ###############");
@@ -45,12 +44,46 @@ public class User
 	}
 }
 
-/*class Teacher extends User
+class Teacher extends User
 {
+	public String type;
+
+	public Teacher(long id, String name, String pwd)
+	{
+		super(id,name,pwd);
+		type = "teacher";
+	}
 	
+	public void push2db()
+	{
+		QuizDB qobj = new QuizDB();
+		qobj.runQuery("select * from user_list where user_id="+id);
+		ArrayList<ArrayList<String>> result = qobj.getResult();
+		if(result.size()>1)
+			System.out.println("User ID already exists");
+		else
+			qobj.runQuery("insert into user_list(user_id,user_name,password,user_type) values("+id+", '"+name+"', '"+pwd+"', '"+type+"')");
+	}
 }
 
 class Student extends User
 {
+	public String type;
 	
-}*/
+	public Student(long id, String name, String pwd)
+	{
+		super(id,name,pwd);
+		type = "teacher";
+	}
+
+	public void push2db()
+	{
+		QuizDB qobj = new QuizDB();
+		qobj.runQuery("select * from user_list where user_id="+id);
+		ArrayList<ArrayList<String>> result = qobj.getResult();
+		if(result.size()>1)
+			System.out.println("User ID already exists");
+		else
+			qobj.runQuery("insert into user_list values("+id+", '"+name+"', '"+pwd+"')");
+	}
+}
