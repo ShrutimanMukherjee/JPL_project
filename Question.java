@@ -40,7 +40,7 @@ public class Question
 	
 	public boolean checkAns(char attempt)
 	{
-		if(correct==attempt)
+		if(attempt==correct)
 			return true;
 		else
 			return false;
