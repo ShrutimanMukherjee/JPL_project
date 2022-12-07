@@ -71,7 +71,11 @@ public class QuizDB
 		}
 		catch (java.sql.SQLException e)
 		{
-			System.out.println("SQL Exception : "+e.getMessage());
+			String mssg = e.getMessage();
+			if(mssg.equals("No results were returned by the query."))
+				System.out.println(" ");
+			else
+				System.out.println("SQL Exception : "+e.getMessage());
 		}
 		
 		try
@@ -86,14 +90,15 @@ public class QuizDB
 	
 	public void resultDisplay()
 	{
+		System.out.println("\n---------------------------------------------------------------------------");
 		for(String fieldName : fields)
-			System.out.print(fieldName+"\t|\t");
-		System.out.println("\n---------------------");
+			System.out.print("|\t"+fieldName+"\t|");
+		System.out.println("\n---------------------------------------------------------------------------");
 		
 		for(ArrayList<String> row : table)
 		{
 			for(String fieldValue : row)
-				System.out.print(fieldValue+"\t|\t");
+				System.out.print("|\t"+fieldValue+"\t|");
 			System.out.println();
 		}
 	}
