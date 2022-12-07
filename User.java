@@ -1,6 +1,7 @@
 import quizlib.QuizDB;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.sql.SQLException;
 
 public abstract class User
 {
@@ -16,7 +17,7 @@ public abstract class User
 		this.id = id;
 	}
 	
-	public boolean inDB()
+	public static boolean userInDB(long id)
 	{
 		QuizDB qobj = new QuizDB();
 		qobj.runQuery("select * from user_list where user_id="+id);
@@ -36,13 +37,23 @@ public abstract class User
 	public static boolean validate(long id, String pwd)
 	{
 		QuizDB qobj = new QuizDB();
+		
+		if(!userInDB(id))
+		{
+			System.out.println("User id cannot be found.");
+			return false;
+		}
 		qobj.runQuery("select user_id, password from user_list where user_id="+id);
+				
 		ArrayList<ArrayList<String>> result = qobj.getResult();
 		String real_pwd = (result.get(1)).get(1);
 		if(real_pwd.equals(pwd))
 			return true;
 		else
+		{
+			System.out.println("Password is incorrect.");
 			return false;
+		}
 	}
 	
 	public abstract void push2db();
@@ -54,8 +65,7 @@ public abstract class User
 		System.out.print("Enter user id: ");
 		int user_id = sc.nextInt();
 		System.out.print("Enter user name: ");
-		String user_name = sc.nextLine();
-		user_name = sc.nextLine();
+		String user_name = sc.nextLine(); user_name = sc.nextLine();
 		System.out.print("Enter password: ");
 		String user_pwd = sc.nextLine();
 		//user_pwd = sc.nextLine();
@@ -65,8 +75,7 @@ public abstract class User
 		if(user_type.equals("teacher"))
 		{
 			System.out.print("Enter Course ID: ");
-			String tchr_course_id = sc.nextLine();
-			tchr_course_id = sc.nextLine();
+			String tchr_course_id = sc.nextLine(); tchr_course_id = sc.nextLine();
 			Teacher t = new Teacher(user_id,user_name,user_pwd,tchr_course_id);
 			t.push2db();
 		}
