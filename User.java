@@ -131,14 +131,14 @@ class Teacher extends User
 		System.out.print("Set the test name: ");
 		String name_test = sc.nextLine();
 		
-		System.out.println("Set the start time: ");
+		System.out.println("Set the start date-time: ");
 		System.out.print("\t year = "); int year_start = sc.nextInt();
 		System.out.print("\t month = "); int month_start = sc.nextInt();
 		System.out.print("\t day of Month = "); int dom_start = sc.nextInt();
 		System.out.print("\t hour = "); int hr_start = sc.nextInt();
 		System.out.print("\t minute = "); int min_start = sc.nextInt();
 		System.out.print("\t second = "); int sec_start = sc.nextInt();
-		System.out.println("Set the end time: ");
+		System.out.println("Set the end date-time: ");
 		System.out.print("\t year = "); int year_end = sc.nextInt();
 		System.out.print("\t month = "); int month_end = sc.nextInt();
 		System.out.print("\t day of Month = "); int dom_end = sc.nextInt();
@@ -182,7 +182,7 @@ class Teacher extends User
 		QuizDB qobj = new QuizDB();
 		
 		System.out.println("\nQuestion Wise Score:");
-		String query = "select m.q_id,m.stud_id,m.score,q.q_str from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"'";
+		String query = "select m.stud_id,m.q_id,m.score,q.q_str from marks as m, question as q where m.q_id=q.q_id and q.test_id='"+id_test+"' order by m.stud_id, m.q_id";
 		qobj.runQuery(query);
 		qobj.resultDisplay();
 		

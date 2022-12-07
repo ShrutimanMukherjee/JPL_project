@@ -1,5 +1,7 @@
 import quizlib.QuizDB;
 import java.util.*;
+import java.io.Console;
+import java.io.IOException;
 
 public class Driver
 {
@@ -8,6 +10,7 @@ public class Driver
 		Scanner sc = new Scanner(System.in);
 		if(type.equals("teacher"))
 		{
+			System.out.println();
 			u.display();
 			while(true)
 			{
@@ -43,6 +46,7 @@ public class Driver
 		}
 		else if(type.equals("student"))
 		{
+			System.out.println();
 			u.display();
 			while(true)
 			{
@@ -66,7 +70,12 @@ public class Driver
 
 					case 2:
 					{
-						System.out.println("\nEnter test id to view marks");
+						System.out.println("Available Tests:");
+						QuizDB qobj = new QuizDB();
+						qobj.runQuery("select * from test");
+						qobj.resultDisplay();
+						
+						System.out.println("\nEnter test id to view your marks");
 						String id_test = sc.next();
 						((Student) u).viewMarks(id_test);
 					}
@@ -102,8 +111,13 @@ public class Driver
 					case 1: {
 						System.out.println("Enter User Id: ");
 						uid = sc.nextInt();
+						
+						Console con = System.console();
 						System.out.println("Enter Password: ");
-						pwd = sc.nextLine();pwd = sc.nextLine();
+						pwd = sc.nextLine(); //to prevent reading previous newline character.
+						pwd = sc.nextLine();
+						/*char[] pass_char = con.readPassword();
+						pwd = new String(pass_char);*/
 						done = User.validate(uid, pwd);
 					}
 						break;
